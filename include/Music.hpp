@@ -13,7 +13,7 @@
 #include <fstream>
 #include <string>
 
-#include "SDL2/SDL_mixer.h"
+#include <SDL2/SDL_mixer.h>
 
 #ifndef MUSIC_HPP
 #define MUSIC_HPP
