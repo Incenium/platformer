@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "platformer", "platformer.vcxproj", "{E207C5C5-0A40-4C7F-A293-4A169944391D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E207C5C5-0A40-4C7F-A293-4A169944391D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E207C5C5-0A40-4C7F-A293-4A169944391D}.Debug|Win32.Build.0 = Debug|Win32
+		{E207C5C5-0A40-4C7F-A293-4A169944391D}.Release|Win32.ActiveCfg = Release|Win32
+		{E207C5C5-0A40-4C7F-A293-4A169944391D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
