@@ -20,15 +20,6 @@
 *.out
 *.app
 
-# Debug and Release Folders
+# Debug and Release Folder
 Debug/
 Release/
-
-# Visual Studio Solution
-*.opensdf
-*.sdf
-*.sln
-*.suo
-*.vcxproj
-*.vcxproj.filters
-premake4.lua
