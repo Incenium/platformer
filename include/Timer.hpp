@@ -6,7 +6,7 @@
 *
 * Email: Inceniium@gmail.com
 *
-* Description: Timer class
+* Description: Timer class, uses SDL_GetTick
 ===============================================================================
 */
 
