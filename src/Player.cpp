@@ -30,7 +30,9 @@ Player::~Player()
 
 bool Player::init(float x, float y)
 {
-    bool success;
+    bool success = true;
 
     Player(x, y);
+    
+    return success;
 }
