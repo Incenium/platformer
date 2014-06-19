@@ -36,7 +36,7 @@ bool ResourceManager::loadResources(std::string path, SDL_Renderer* renderer)
     file.open(path);
 
     if (!file.is_open()){
-        DEBUG_LOG << "Unable to open resource file " << path << std::endl << std::endl;
+        DEBUG_LOG << "ResourceManager loadResources(): Unable to open resource file " << path << '\n' << std::endl;
 
         success = false;
     }
@@ -46,7 +46,7 @@ bool ResourceManager::loadResources(std::string path, SDL_Renderer* renderer)
             std::vector<std::string> temp = stringSplit(line);
 
             if (temp.size() != 2){
-                DEBUG_LOG << "Resource Manager: Malformed line in resource file " << path << std::endl << std::endl;
+                DEBUG_LOG << "ResourceManager loadResources(): Malformed line in resource file " << path << '\n' << std::endl;
 
                 success = false;
 
@@ -61,7 +61,7 @@ bool ResourceManager::loadResources(std::string path, SDL_Renderer* renderer)
                     Spritesheet* s = new Spritesheet;
 
                     if (!s->loadFromFile(name, renderer)){
-                        DEBUG_LOG << "Resource Manager: Unable to load spritesheet " << name;
+                        DEBUG_LOG << "ResourceManager loadResources(): Unable to load spritesheet " << name << '\n' << std::endl;
 
                         success = false;
 
@@ -76,7 +76,7 @@ bool ResourceManager::loadResources(std::string path, SDL_Renderer* renderer)
                     Animation* a = new Animation;
 
                     if (!a->loadFromFile(name)){
-                        DEBUG_LOG << "Resource Manager: Unable to load animation " << name;
+                        DEBUG_LOG << "Resource Manager: Unable to load animation " << name << '\n' << std::endl;
 
                         success = false;
 
@@ -87,7 +87,33 @@ bool ResourceManager::loadResources(std::string path, SDL_Renderer* renderer)
                         m_animations[name] = a;
                 }
 
-                // else if...
+                else if (resType == "music"){
+                    Music* m = new Music;
+
+                    if (!m->loadFromFile(name)){
+                        DEBUG_LOG << "ResourceManager loadResources(): Unable to load music " << name << '\n' << std::endl;
+
+                        success = false;
+
+                        break;
+                    }
+
+                    else
+                        m_music[name] = m;
+                }
+
+                else if (resType == "soundeffect"){
+                    SoundEffect* se = new SoundEffect;
+
+                    if (!se->loadFromFile(name)){
+                        DEBUG_LOG << "ResourceManager loadResources(): Unable to load sound effect " << name << '\n' << std::endl;
+
+                        success = false;
+                    }
+
+                    else
+                        m_soundeffects[name] = se;
+                }
             }
         }
     }
@@ -100,7 +126,7 @@ Spritesheet* ResourceManager::getSpritesheet(std::string spritesheet)
     std::map<std::string, Spritesheet*>::iterator it = m_spritesheets.find(spritesheet);
 
     if (it == m_spritesheets.end()){
-        DEBUG_LOG << "Resource Manager: Unable to find spritesheet " << spritesheet << std::endl << std::endl;
+        DEBUG_LOG << "ResourceManager getSpritesheet(): Unable to find spritesheet " << spritesheet << '\n' << std::endl;
 
         return nullptr;
     }
@@ -114,7 +140,35 @@ Animation* ResourceManager::getAnimation(std::string animation)
     std::map<std::string, Animation*>::iterator it = m_animations.find(animation);
 
     if (it == m_animations.end()){
-        DEBUG_LOG << "Resource Manager: Unable to find animation " << animation << std::endl << std::endl;
+        DEBUG_LOG << "ResourceManager getAnimation(): Unable to find animation " << animation << '\n' << std::endl;
+
+        return nullptr;
+    }
+
+    else
+        return it->second;
+}
+
+Music* ResourceManager::getMusic(std::string music)
+{
+    std::map<std::string, Music*>::iterator it = m_music.find(music);
+
+    if (it == m_music.end()){
+        DEBUG_LOG << "ResourceManager getMusic(): Unable to find music " << music << '\n' << std::endl;
+
+        return nullptr;
+    }
+
+    else
+        return it->second;
+}
+
+SoundEffect* ResourceManager::getSoundEffect(std::string soundEffect)
+{
+    std::map<std::string, SoundEffect*>::iterator it = m_soundeffects.find(soundEffect);
+
+    if (it == m_soundeffects.end()){
+        DEBUG_LOG << "ResourceManager getSoundEffect(): Unable to find sound effect " << soundEffect << '\n' << std::endl;
 
         return nullptr;
     }

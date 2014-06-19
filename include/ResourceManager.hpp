@@ -22,6 +22,8 @@
 
 #include "Spritesheet.hpp"
 #include "Animation.hpp"
+#include "Music.hpp"
+#include "SoundEffect.hpp"
 
 extern std::ofstream DEBUG_LOG;
 
@@ -33,13 +35,15 @@ class ResourceManager {
     bool loadResources(std::string path, SDL_Renderer* renderer);
 
     Spritesheet* getSpritesheet(std::string spritesheet);
-    Animation* getAnimation(std::string animation);
+    Animation*   getAnimation(std::string animation);
+    Music*       getMusic(std::string music);
+    SoundEffect* getSoundEffect(std::string soundEffect);
 
   private:
     std::map<std::string, Spritesheet*> m_spritesheets;
     std::map<std::string, Animation*> m_animations;
-    //std::map m_music;
-    //std::map m_soundeffects;
+    std::map<std::string, Music*> m_music;
+    std::map<std::string, SoundEffect*> m_soundeffects;
 };
 
 #endif
