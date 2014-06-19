@@ -22,7 +22,12 @@
 
 // For writing to debug.log
 extern std::ofstream DEBUG_LOG;
+<<<<<<< HEAD
 extern int renderPosX, renderPosY;
+=======
+extern SDL_Rect cameraRect;
+extern int screenWidth, screenHeight;
+>>>>>>> 45a87292c1b9e5a6bf2e406285cc48f7548347ce
 
 class Texture {
   public:

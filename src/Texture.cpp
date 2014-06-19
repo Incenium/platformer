@@ -60,7 +60,11 @@ void Texture::free()
 
 void Texture::render(int x, int y, SDL_Renderer* renderer, SDL_Rect* clip)
 {
+<<<<<<< HEAD
     SDL_Rect renderQuad = {x - renderPosX, y - renderPosY, m_width, m_height};
+=======
+	SDL_Rect renderQuad = {x - cameraRect.x, y - cameraRect.y, m_width * (screenWidth / cameraRect.w), m_height * (screenHeight / cameraRect.h)};
+>>>>>>> 45a87292c1b9e5a6bf2e406285cc48f7548347ce
 
     if (clip != nullptr){
         renderQuad.w = clip->w;
