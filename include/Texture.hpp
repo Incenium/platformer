@@ -23,7 +23,7 @@
 // For writing to debug.log
 extern std::ofstream DEBUG_LOG;
 extern SDL_Rect cameraRect;
-extern int screenWidth, screenHeight;
+extern const int screenWidth, screenHeight;
 
 class Texture {
   public:
@@ -34,7 +34,7 @@ class Texture {
 
     void free();
 
-    void render(int x, int y, SDL_Renderer* renderer,
+    void render(float x, float y, SDL_Renderer* renderer,
                 SDL_Rect* clip = nullptr);
 
     //SDL_Texture* getTexture();

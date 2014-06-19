@@ -58,7 +58,7 @@ void Texture::free()
     }
 }
 
-void Texture::render(int x, int y, SDL_Renderer* renderer, SDL_Rect* clip)
+void Texture::render(float x, float y, SDL_Renderer* renderer, SDL_Rect* clip)
 {
 	SDL_Rect renderQuad = {x - cameraRect.x, y - cameraRect.y, m_width * (screenWidth / cameraRect.w), m_height * (screenHeight / cameraRect.h)};
 
