@@ -14,7 +14,7 @@
 SDL_Renderer* renderer;
 SDL_Window* window;
 const int screenWidth = 1280, screenHeight = 720;
-int renderPosX, renderPosY;
+SDL_Rect cameraRect;
 
 ResourceManager resManager;
 std::ofstream DEBUG_LOG;
@@ -29,8 +29,10 @@ int main(int argc, char* args[]) {
 		DEBUG_LOG << "Failed to initiate program";
 	} else {
 
-		renderPosX = 0;
-		renderPosY = 0;
+		cameraRect.x = 0;
+		cameraRect.y = 0;
+		cameraRect.w = screenWidth;
+		cameraRect.h = screenHeight;
 		background.loadFromFile("res/spritesheets/Kenny's Stuff (temp storage)/Mushroom pack (50 assets)/Backgrounds/bg_grasslands.png", renderer);
 
 		if (false) { //for a loading function/routine
@@ -69,7 +71,7 @@ void Update(float deltaTime) {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 
-	renderPosX = -x + screenWidth;
+	cameraRect.x = -x + screenWidth;
 
 	SDL_Rect bgRect = {0, 0, screenWidth * 2, screenHeight};
 	background.render(0, 0, renderer, &bgRect);
