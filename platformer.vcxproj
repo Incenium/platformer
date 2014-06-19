@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClInclude Include="include\Animation.hpp" />
     <ClInclude Include="include\Music.hpp" />
+    <ClInclude Include="include\Player.hpp" />
     <ClInclude Include="include\ResourceManager.hpp" />
     <ClInclude Include="include\SoundEffect.hpp" />
     <ClInclude Include="include\Spritesheet.hpp" />
@@ -90,6 +91,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Music.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\SoundEffect.cpp" />
     <ClCompile Include="src\Spritesheet.cpp" />
