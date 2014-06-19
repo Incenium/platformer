@@ -1,0 +1,2 @@
+spritesheet res/spritesheets/player.spritesheet
+animation res/animations/player_running.animation
