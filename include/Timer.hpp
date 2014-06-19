@@ -10,12 +10,13 @@
 ===============================================================================
 */
 
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
+#include <iostream>
 
 #ifndef TIMER_HPP
 #define TIMER_HPP
 
-//extern std::ofstream DEBUG_LOG;
+extern std::ofstream DEBUG_LOG;
 
 class Timer {
   public:
