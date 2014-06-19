@@ -31,7 +31,7 @@ class Player {
     bool init(float x, float y);
 
     void handleInput(SDL_Event e);
-    void update(float delta);
+    void update(float deltaTime);
     void render(SDL_Renderer* renderer);
 
   private:
@@ -41,6 +41,8 @@ class Player {
     enum Animations {
         PLAYER_RUNNING_RIGHT,
         PLAYER_RUNNING_LEFT,
+		//PLAYER_JUMPING,
+		//PLAYER_FALLING
         //MARIO_JUMPING_RIGHT,
         //MARIO_JUMPING_LEFT
     };

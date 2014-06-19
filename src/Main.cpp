@@ -11,6 +11,7 @@
 #include <iostream>
 #include "Animation.hpp"
 #include "Music.hpp"
+#include "Player.hpp"
 #include "ResourceManager.hpp"
 #include "SoundEffect.hpp"
 #include "Spritesheet.hpp"
@@ -30,6 +31,7 @@ bool Init();
 void Update(float deltaTime);
 
 Texture background;
+Player currentPlayer(screenHeight, screenWidth / 2);
 
 int main(int argc, char* args[]) {
 	if (!Init()) {
@@ -54,6 +56,7 @@ int main(int argc, char* args[]) {
 
 			while (!quit) {
 				while(SDL_PollEvent(&e) != 0) {
+					currentPlayer.handleInput(e);
 					if (e.type == SDL_QUIT) {
 						quit = true;
 					}
@@ -83,6 +86,9 @@ void Update(float deltaTime) {
 
 	SDL_Rect bgRect = {0, 0, screenWidth * 2, screenHeight};
 	background.render(0, 0, renderer, &bgRect);
+
+	currentPlayer.update(deltaTime);
+	currentPlayer.render(renderer);
 
 	SDL_RenderPresent(renderer);
 }
