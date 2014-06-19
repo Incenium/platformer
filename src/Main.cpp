@@ -31,9 +31,16 @@ bool Init();
 void Update(float deltaTime);
 
 Texture background;
-Player currentPlayer(screenHeight, screenWidth / 2);
+//Player currentPlayer(screenHeight, screenWidth / 2);
+
+Spritesheet* playerSpritesheet = nullptr;
+SDL_Rect* sprite;
+
+Animation* playerAnimation = nullptr;
 
 int main(int argc, char* args[]) {
+	DEBUG_LOG.open("debug.log");
+
 	if (!Init()) {
 		DEBUG_LOG << "Failed to initiate program";
 	}
@@ -47,16 +54,24 @@ int main(int argc, char* args[]) {
 
 		if (false) { //for a loading function/routine
 			DEBUG_LOG << "Failed to load program files";
-		} else {
+		}
+
+		else {
 			bool quit = false;
 			SDL_Event e;
 
 			Uint32 lastTime, currentTime = SDL_GetTicks(); //set up deltaTime
 			float deltaTime;
 
+			playerSpritesheet = resManager.getSpritesheet("res/spritesheets/player.spritesheet");
+
+			sprite = playerSpritesheet->getSprite("player_walk02");
+
+			playerAnimation = resManager.getAnimation("res/animations/player_running.animation");
+
 			while (!quit) {
 				while(SDL_PollEvent(&e) != 0) {
-					currentPlayer.handleInput(e);
+					//currentPlayer.handleInput(e);
 					if (e.type == SDL_QUIT) {
 						quit = true;
 					}
@@ -87,8 +102,14 @@ void Update(float deltaTime) {
 	SDL_Rect bgRect = {0, 0, screenWidth * 2, screenHeight};
 	background.render(0, 0, renderer, &bgRect);
 
-	currentPlayer.update(deltaTime);
-	currentPlayer.render(renderer);
+	playerSpritesheet->render(sprite, 500, 500, renderer);
+
+	playerAnimation->run();
+
+	playerAnimation->render(600, 500, renderer);
+
+	// currentPlayer.update(deltaTime);
+	// currentPlayer.render(renderer);
 
 	SDL_RenderPresent(renderer);
 }
@@ -125,10 +146,16 @@ bool Init() {
 				}
 				
 				else {
-					int mixFlags = MIX_INIT_MP3;
+					/*int mixFlags = MIX_INIT_MP3;
 					if (!(Mix_Init(mixFlags) & mixFlags)) {
 						DEBUG_LOG << "Error: Failed to initiate Mixer Subsystem. SDL_MIX Error: " << Mix_GetError() << std::endl;
 						sucess = false;
+					}*/
+
+					if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
+					    printf("SDL_mixer could not initialize! SDL_mixer error: %s\n", Mix_GetError());
+
+					    sucess = false;
 					}
 					
 					else {
@@ -145,6 +172,12 @@ bool Init() {
 				}
 			}
 		}
+	}
+
+	if (!resManager.loadResources("res/resources.res", renderer)){
+		DEBUG_LOG << "Could not load resources from resource file\n" << std::endl;
+
+		sucess = false;
 	}
 
 	return sucess;
