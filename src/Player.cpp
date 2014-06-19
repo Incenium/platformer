@@ -1,7 +1,6 @@
 #include "Player.hpp"
 
-Player::Player()
-{
+Player::Player() {
     m_x = 0.0f;
     m_y = 0.0f;
 
@@ -11,8 +10,7 @@ Player::Player()
         m_animations[i] = nullptr;
 }
 
-Player::Player(float x, float y)
-{
+Player::Player(float x, float y) {
     m_x = x;
     m_y = y;
 
@@ -22,15 +20,15 @@ Player::Player(float x, float y)
         m_animations[i] = nullptr;
 }
 
-Player::~Player()
-{
+Player::~Player() {
     for (int i = 0; i < 2; i++)
         m_animations[i] = nullptr;
 }
 
-bool Player::init(float x, float y)
-{
-    bool success;
+bool Player::init(float x, float y) {
+    bool success = true;
 
     Player(x, y);
+
+	return success;
 }

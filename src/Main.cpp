@@ -27,8 +27,9 @@ Texture background;
 int main(int argc, char* args[]) {
 	if (!Init()) {
 		DEBUG_LOG << "Failed to initiate program";
-	} else {
-
+	}
+	
+	else {
 		cameraRect.x = 0;
 		cameraRect.y = 0;
 		cameraRect.w = screenWidth;
@@ -85,33 +86,45 @@ bool Init() {
 	if (SDL_INIT_VIDEO < 0) {
 		DEBUG_LOG << "Error: Failed to initiate SDL Video Subsystem. SDL_Error: " << SDL_GetError() << std::endl;
 		sucess = false;
-	} else {
+	}
+	
+	else {
 		window = SDL_CreateWindow("The Platformer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, NULL);
 		if (window == NULL) {
 			DEBUG_LOG << "Error: Failed to create window. SDL Error: " << SDL_GetError() << std::endl;
 			sucess = false;
-		} else {
+		}
+		
+		else {
 			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			if (renderer == NULL) {
 				DEBUG_LOG << "Error: Failed to create renderer. SDL Error: " << SDL_GetError() << std::endl;
 				sucess = false;
-			} else {
+			}
+			
+			else {
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 				int imgFlags = IMG_INIT_PNG;
 				if (!(IMG_Init(imgFlags) & imgFlags)) {
 					DEBUG_LOG << "Error: Failed to initiate Image Subsystem. SDL_IMG Error: " << IMG_GetError() << std::endl;
 					sucess = false;
-				} else {
+				}
+				
+				else {
 					int mixFlags = MIX_INIT_MP3;
 					if (!(Mix_Init(mixFlags) & mixFlags)) {
 						DEBUG_LOG << "Error: Failed to initiate Mixer Subsystem. SDL_MIX Error: " << Mix_GetError() << std::endl;
 						sucess = false;
-					} else {
+					}
+					
+					else {
 						if (TTF_Init() == -1) {
 							DEBUG_LOG << "Error: Failed to initiate Font Subsystem. SDL_TTF Error: " << TTF_GetError() << std::endl;
 							sucess = false;
-						} else {
+						}
+						
+						else {
 							SDL_Surface* icon = IMG_Load(/*Icon location for the window*/"");
 							SDL_SetWindowIcon(window, icon);
 						}

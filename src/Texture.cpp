@@ -1,20 +1,17 @@
 #include "Texture.hpp"
 
-Texture::Texture()
-{
+Texture::Texture() {
     m_texture = nullptr;
 
     m_width = 0;
     m_height = 0;
 }
 
-Texture::~Texture()
-{
+Texture::~Texture() {
     free();
 }
 
-bool Texture::loadFromFile(std::string path, SDL_Renderer* renderer)
-{
+bool Texture::loadFromFile(std::string path, SDL_Renderer* renderer) {
     free();
 
     SDL_Texture* newTexture = nullptr;
@@ -48,8 +45,7 @@ bool Texture::loadFromFile(std::string path, SDL_Renderer* renderer)
     return m_texture != nullptr;
 }
 
-void Texture::free()
-{
+void Texture::free() {
     if (m_texture != nullptr){
         SDL_DestroyTexture(m_texture);
 
@@ -58,17 +54,8 @@ void Texture::free()
     }
 }
 
-void Texture::render(float x, float y, SDL_Renderer* renderer, SDL_Rect* clip)
-{
-<<<<<<< HEAD
-<<<<<<< HEAD
-    SDL_Rect renderQuad = {x - renderPosX, y - renderPosY, m_width, m_height};
-=======
+void Texture::render(float x, float y, SDL_Renderer* renderer, SDL_Rect* clip) {
 	SDL_Rect renderQuad = {x - cameraRect.x, y - cameraRect.y, m_width * (screenWidth / cameraRect.w), m_height * (screenHeight / cameraRect.h)};
->>>>>>> 45a87292c1b9e5a6bf2e406285cc48f7548347ce
-=======
-	SDL_Rect renderQuad = {x - cameraRect.x, y - cameraRect.y, m_width * (screenWidth / cameraRect.w), m_height * (screenHeight / cameraRect.h)};
->>>>>>> 45a87292c1b9e5a6bf2e406285cc48f7548347ce
 
     if (clip != nullptr){
         renderQuad.w = clip->w;
@@ -78,12 +65,5 @@ void Texture::render(float x, float y, SDL_Renderer* renderer, SDL_Rect* clip)
     SDL_RenderCopy(renderer, m_texture, clip, &renderQuad);
 }
 
-int Texture::getWidth()
-{
-    return m_width;
-}
-
-int Texture::getHeight()
-{
-    return m_height;
-}
+int Texture::getWidth() { return m_width; }
+int Texture::getHeight() { return m_height; }
