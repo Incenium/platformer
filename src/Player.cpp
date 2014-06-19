@@ -45,11 +45,3 @@ void Player::update(float deltaTime) {
 void Player::render(SDL_Renderer* renderer) {
 	m_animations[m_currentAnimation]->render(m_x, m_y, renderer);
 }
-
-bool Player::init(float x, float y) {
-    bool success = true;
-
-    Player(x, y);
-
-	return success;
-}
