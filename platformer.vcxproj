@@ -87,7 +87,7 @@
     <ClInclude Include="include\Timer.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Music.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />

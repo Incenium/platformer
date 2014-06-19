@@ -22,6 +22,7 @@
 
 // For writing to debug.log
 extern std::ofstream DEBUG_LOG;
+extern int renderPosX, renderPosY;
 
 class Texture {
   public:
