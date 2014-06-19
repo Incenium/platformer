@@ -1,23 +1,7 @@
-#include <iostream>
-
-#ifdef _WIN32
 #include <SDL2\SDL.h>
 #include <SDL2\SDL_image.h>
 #include <SDL2\SDL_ttf.h>
-
-#include "include\Animation.hpp"
-#include "include\Music.hpp"
-#include "include\ResourceManager.hpp"
-#include "include\SoundEffect.hpp"
-#include "include\Spritesheet.hpp"
-#include "include\strutil.hpp"
-#include "include\Texture.hpp"
-#include "include\Timer.hpp"
-#else
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-
+#include <iostream>
 #include "Animation.hpp"
 #include "Music.hpp"
 #include "ResourceManager.hpp"
@@ -26,12 +10,11 @@
 #include "strutil.hpp"
 #include "Texture.hpp"
 #include "Timer.hpp"
-#endif
-
-const int screenWidth = 1280, screenHeight = 720;
 
 SDL_Renderer* renderer;
 SDL_Window* window;
+const int screenWidth = 1280, screenHeight = 720;
+int renderPosX, renderPosY;
 
 ResourceManager resManager;
 std::ofstream DEBUG_LOG;
@@ -39,12 +22,19 @@ std::ofstream DEBUG_LOG;
 bool Init();
 void Update(float deltaTime);
 
+Texture background;
+
 int main(int argc, char* args[]) {
 	if (!Init()) {
-		printf("Failed to initiate program\n");
+		DEBUG_LOG << "Failed to initiate program";
 	} else {
+
+		renderPosX = 0;
+		renderPosY = 0;
+		background.loadFromFile("res/spritesheets/Kenny's Stuff (temp storage)/Mushroom pack (50 assets)/Backgrounds/bg_grasslands.png", renderer);
+
 		if (false) { //for a loading function/routine
-			printf("Failed to load program files\n");
+			DEBUG_LOG << "Failed to load program files";
 		} else {
 			bool quit = false;
 			SDL_Event e;
@@ -76,13 +66,13 @@ void Update(float deltaTime) {
 
 	//updates done here
 
-	SDL_RenderPresent(renderer);
-}
+	int x, y;
+	SDL_GetMouseState(&x, &y);
 
-void Render() {
-	SDL_RenderClear(renderer);
-	
-	//rendering done here
+	renderPosX = -x + screenWidth;
+
+	SDL_Rect bgRect = {0, 0, screenWidth * 2, screenHeight};
+	background.render(0, 0, renderer, &bgRect);
 
 	SDL_RenderPresent(renderer);
 }
@@ -91,33 +81,33 @@ bool Init() {
 	bool sucess = true;
 
 	if (SDL_INIT_VIDEO < 0) {
-		printf("Error: Failed to initiate SDL Video Subsystem. SDL_Error: %s\n", SDL_GetError());
+		DEBUG_LOG << "Error: Failed to initiate SDL Video Subsystem. SDL_Error: " << SDL_GetError() << std::endl;
 		sucess = false;
 	} else {
 		window = SDL_CreateWindow("The Platformer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, NULL);
 		if (window == NULL) {
-			printf("Error: Failed to create window. SDL Error: %s\n", SDL_GetError());
+			DEBUG_LOG << "Error: Failed to create window. SDL Error: " << SDL_GetError() << std::endl;
 			sucess = false;
 		} else {
 			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			if (renderer == NULL) {
-				printf("Error: Failed to create renderer. SDL Error: %s\n", SDL_GetError());
+				DEBUG_LOG << "Error: Failed to create renderer. SDL Error: " << SDL_GetError() << std::endl;
 				sucess = false;
 			} else {
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 				int imgFlags = IMG_INIT_PNG;
 				if (!(IMG_Init(imgFlags) & imgFlags)) {
-					printf("Error: Failed to initiate Image Subsystem. SDL_IMG Error: %s\n", IMG_GetError());
+					DEBUG_LOG << "Error: Failed to initiate Image Subsystem. SDL_IMG Error: " << IMG_GetError() << std::endl;
 					sucess = false;
 				} else {
 					int mixFlags = MIX_INIT_MP3;
 					if (!(Mix_Init(mixFlags) & mixFlags)) {
-						printf("Error: Failed to initiate Mixer Subsystem. SDL_MIX Error: %s", Mix_GetError());
+						DEBUG_LOG << "Error: Failed to initiate Mixer Subsystem. SDL_MIX Error: " << Mix_GetError() << std::endl;
 						sucess = false;
 					} else {
 						if (TTF_Init() == -1) {
-							printf("Error: Failed to initiate Font Subsystem. SDL_TTF Error: %s\n", TTF_GetError());
+							DEBUG_LOG << "Error: Failed to initiate Font Subsystem. SDL_TTF Error: " << TTF_GetError() << std::endl;
 							sucess = false;
 						} else {
 							SDL_Surface* icon = IMG_Load(/*Icon location for the window*/"");
