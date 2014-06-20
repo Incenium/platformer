@@ -39,9 +39,11 @@ void Player::handleInput(SDL_Event e) {
 		}
 	}
 }
+
 void Player::update(float deltaTime) {
 	m_animations[m_currentAnimation]->run();
 }
+
 void Player::render(SDL_Renderer* renderer) {
 	m_animations[m_currentAnimation]->render(m_x, m_y, renderer);
 }
